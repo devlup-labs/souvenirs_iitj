@@ -43,6 +43,35 @@ function Checker(parent_folder_id) {
 
 
 
+// This code is used for generating Years button --------------------------------------------------------------------
+function Yearbtn(){
+  const Organised = DriveApp.getFolderById('1Ll3tOvBX_chgs2KGY4WCSGMcVwcLDKpu').getFolders();
+  let [YearFoldersName, YearFoldersId] = Folder_Name_and_ID(Organised);
+  let FolderList = [];
+  for(i = 0 ; i < YearFoldersName.length; i++){
+    let list = {name : YearFoldersName[i],
+                id: YearFoldersId[i]};
+    FolderList.push(list);
+    };
+  //Logger.log(FolderList);
+ let byName = FolderList.slice(0);
+ byName.sort(function(a,b){
+ let x= a.name.toLowerCase();
+ let y= b.name.toLowerCase();
+ return x<y? -1 : x>y ? 1:0;
+ });
+  // Logger.log(byName);
+for(i = 0 ; i < byName.length; i++){
+    YearFoldersName[i] = byName[i].name;
+    YearFoldersId[i] = byName[i].id;
+    };  
+  // Logger.log(YearFoldersName);
+  //Logger.log(YearFoldersId);
+  
+  
+  return [YearFoldersName.reverse() , YearFoldersId.reverse()];
+}
+
 
 
 
