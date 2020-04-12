@@ -74,6 +74,20 @@ for(i = 0 ; i < byName.length; i++){
 
 
 
+function CardsDisplay(yearFolderId){
+  const Folders = DriveApp.getFolderById(yearFolderId).getFolders();
+  let [FoldersName, FoldersId] = Folder_Name_and_ID(Folders);
+  return [FoldersName , FoldersId];
+
+}
+
+
+
+
+
+
+
+
 
 
 
