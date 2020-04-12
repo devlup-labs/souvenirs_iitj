@@ -24,8 +24,22 @@ function Folder_Name_and_ID(parentFolder){
 }
 
 
-
-
+// This code is used for getting folders and displaying Images -----------------------------------------------------
+function Checker(parent_folder_id) {
+  
+  const parentfiles = DriveApp.getFolderById(parent_folder_id).getFiles();
+  const parentfolders = DriveApp.getFolderById(parent_folder_id).getFolders();
+  const filesArray = [];
+  
+  while(parentfiles.hasNext()) {
+    filesArray.push(parentfiles.next().getName());
+    break;
+  }
+  
+  let [foldersArray, foldersArrayID] = Folder_Name_and_ID(parentfolders);
+ 
+  return [foldersArray , filesArray , foldersArrayID, parent_folder_id]
+}
 
 
 
