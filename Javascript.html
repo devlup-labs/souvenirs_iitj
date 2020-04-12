@@ -146,6 +146,75 @@
         $("#Event").css("display", "none");
         FolderCounter(LatestFolderId);
     });
+    
+    // webfetch function appends the html content it gets form Websitefetch function from Code.gs
+    // This function first removes all previously added elements and then render new.
+    // Also perform some changes in styling of fetched html
+
+    function webfetch(content) {
+        $(".fetchedPage").remove();
+        $(".WebsiteFetch").append("<div class = 'fetchedPage'>" + content + "</div>");
+        $(".flip-contents").removeClass("flip-list-view");
+        $(".flip-contents").addClass("flip-grid-view");
+        $(".flip-entry-list-icon").remove();
+        $(".flip-entry-title").remove();
+    };
+
+    // doStuff function executes 4 important functions "Checker" and "getData" from Code.gs and "change" and "updateBreadCrumb" and hide home section and show event section if Home has show class already
+
+    function doStuff(FolderId) {
+        if ($("#Home").hasClass("show")) {
+            $("#Home").removeClass("show");
+            $("#Home").addClass("hide");
+            $("#header").removeClass("header");
+            $(".welcome").css("display", "none");
+            $(".navbar").addClass("bg-colored");
+            $("#form").css("display", "none");
+            $("#Event").css("display", "block")
+        };
+        google.script.run.withSuccessHandler(change).Checker(FolderId);
+        google.script.run.withSuccessHandler(updateBreadCrumb).getData(FolderId);
+    };
+
+// This function calls webfetch function and executes Websitefetch function from Code.gs if there some files are present in folder.
+// Also this function render folder cards inside Event section
+    function change(returnedArray) {
+
+        const [Folders, Files, FoldersId, ParentID] = returnedArray;
+        
+
+        var embed_url = "https://drive.google.com/embeddedfolderview?id=" + ParentID + "#grid";
+        if (Files.length > 0) {
+            google.script.run.withSuccessHandler(webfetch).Websitefetch(embed_url);
+        };
+
+        if (Files.length == 0) {
+            $(".fetchedPage").remove();
+        };
+
+        if (Folders.length > 0) {
+
+            for (i = 0; i < Folders.length; i++) {
+                F = Folders[i];
+                $(".FolderView").append(
+
+                    "<div class='card mb-4 bttn show'>" +
+                    "<div class='view overlay'>" +
+                    "<img class='card-img-top' " + "id= '" + FoldersId[i] +
+                    "' src='https://mdbootstrap.com/img/Photos/Others/images/16.jpg'alt='Card image cap'>" +
+                    "<a href='#!'>" +
+                    " <div class='mask rgba-white-slight'></div>" +
+                    "</a> " +
+                    "</div>" +
+                    "<div class='card-body'>" +
+                    "<h4 class='card-title'>" + F + "</h4>" +
+                    "<button type='button' class='btn btn-light-blue btn-md'" + "onclick =" + "doStuff('" +
+                    FoldersId[i] + "')" + ">Open Album</button></div></div>"
+
+                );
+            };
+        };
+    };
 
 
 
