@@ -81,7 +81,21 @@ function CardsDisplay(yearFolderId){
 
 }
 
+//Websitefetch function fetch data from passed url and return its html content
 
+function Websitefetch(website_to_fetch){
+var response = UrlFetchApp.fetch(website_to_fetch);
+var content = response.getContentText();
+  return content
+}
+
+function getData(id)
+{
+  var x = DriveApp.getFolderById(id);
+  var name = x.getName();
+  var id = x.getId();
+  return [id, name];
+}
 
 
 
