@@ -1,7 +1,26 @@
-function doGet(request) {
-  return HtmlService.createTemplateFromFile('index')
-      .evaluate();
-}
+function doGet(e) {
+  if (e.parameters.v == 'team'){
+    return HtmlService.createTemplateFromFile('team')
+    .evaluate()
+    .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL)
+    .addMetaTag('viewport', 'width=device-width, initial-scale=1');
+      
+    }
+    
+    if (e.parameters.v == 'event'){
+    return HtmlService.createTemplateFromFile('event')
+    .evaluate()
+    .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL)
+    .addMetaTag('viewport', 'width=device-width, initial-scale=1');
+      
+    }
+    
+    return HtmlService.createTemplateFromFile('index')
+    .evaluate()
+    .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL)
+    .addMetaTag('viewport', 'width=device-width, initial-scale=1');
+    
+  }
 
 function include(filename) {
   return HtmlService.createHtmlOutputFromFile(filename)
@@ -97,6 +116,38 @@ function getData(id)
   return [id, name];
 }
 
+function sendmail(){ 
+  MailApp.sendEmail('sonawane.1@iitj.ac.in', 'Entry for SDA site', 'Data has been added to the spreadsheet. The link to the spreadsheet is attached below: https://docs.google.com/spreadsheets/d/1xJ8TyAVEcSm5RtgHW1KOOsb3-vbK3rmyC0eq2uCWZ4U/edit#gid=1155803024');
+}
+
+
+// recaptcha
+var secret = '6Ld_YuwUAAAAAOH62DtrydnqtgEO540NvV1U2_Rn';
+
+function verifyCaptcha(formObj){
+var payload = {
+  'secret' : secret,
+  'response': formObj
+}
+var url = 'https://www.google.com/recaptcha/api/siteverify';
+var resp = UrlFetchApp.fetch(url, {
+  payload : payload,
+  method : 'POST'
+}).getContentText();
+return JSON.parse(resp).success;
+}
+
+function processForm(obj){
+
+// Verify Catcha
+var isNotBot = verifyCaptcha(obj);
+if(!isNotBot){
+//    document.getElementById("user_photo_submit").attributes[0].value = "#";
+  return 'You are a robot';
+}
+sendmail();
+return 'Form submitted successfully';
+}
 
 
 
