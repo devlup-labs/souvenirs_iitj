@@ -1,6 +1,8 @@
 <script>
-  google.script.run.withSuccessHandler(yearbtn)
-  .Yearbtn(); // This function call is gets a returned array from Yearbtn and put the returned array in yearbtn function as first variable.
+  // This function call is gets a returned array from Yearbtn and put the returned array in yearbtn function as first variable.
+  google.script.run.withSuccessHandler(yearbtn).Yearbtn();
+
+
   let LatestFolderId = ' '; // This variable is created for holding Folder Id of first child of ".dropdown-menu" class. 
   // yearbtn Function appends dropdown items in "dropdown-menu" class. These dropdown items are Folders inside "Organised Folder" in drive   
   function yearbtn(returnedArray_from_Yearbtn) {
@@ -15,7 +17,6 @@
     // Folder Id of first child set into LatestFolderId Variable
     FolderCounter(LatestFolderId);
     // Function call for showing default event folders on home page ("Default Event Folder are the folders inside first child of "dropdown" class") 
-
     document.getElementById("year_btn").innerHTML = FolderName[0];
 
   };
@@ -25,10 +26,9 @@
   // executes CardsDisplay and pass its returned values of CardsDisplay in Show_Folders
 
 
-
-
   function FolderCounter(FolderId) {
     $(".cards-holder").empty();
+    $(".cards-holder").append("<div class='loading-parent text-center'><div class='loading'></div></div>");
     var name = document.getElementById(FolderId).innerHTML;
     document.getElementById("year_btn").innerHTML = name;
     google.script.run.withSuccessHandler(Show_Folders).CardsDisplay(FolderId);
@@ -44,20 +44,21 @@
         "<div class='card-warper'>" +
         "<div class='card'>" +
         "<div class='card-body'>" +
-        "<div class='card-title'><h3>" + Folder + "</h3></div>" +
+        "<div class='card-title'><h5>" + Folder + "</h5></div>" +
         "<div class = 'open-folder-btn'><a href='#header'type='button' class='btn nav-color btn-md'" + "onclick =" +
         "doStuff('" + FolderId[i] + "')" + ">Open Album</a></div></div></div></div>"
       );
     };
+    $(".loading-parent").remove();
   };
 
   // for breadcrumb
   // These array stores Id and Names of elements inside Breadcrumb
-
   var Idarray = [];
   var Namearray = [];
   // updateBreadCrumb Function take a array input from getData function in Code.gs
   // First checks whether the clicked folder is present in breadcrumb if ("yes" then it remove all elements and render elements till the name of folder clicked ) else ( appends new element in breadcrumb)
+
   function updateBreadCrumb(arg) {
     if (Idarray.includes(arg[0])) {
 
@@ -92,7 +93,6 @@
   }
 
   // Adding Functionality to Home element in breadcrumb
-
   function gohome() {
     $("#Home").removeClass("hide");
     $("#Home").addClass("show");
@@ -100,6 +100,7 @@
     $(".welcome").css("display", "flex");
     $(".navbar-nav").removeClass("nav-color");
     $(".navbar").removeClass("bg-colored");
+    $(".navbar-collapse").removeClass("nav-color");
     $("#nav-logo").css("width", "60px !important");
     $("#Event").css("display", "none");
     $("#form").css("display", "block");
@@ -112,11 +113,9 @@
     $("#list").empty();
     $("#list").append("<li onclick='gohome()' class='breadcrumb-item active'>Home</li>");
     document.getElementById("event-after-home").innerHTML = '';
-    //      $(".header").css("background-image", "url('https://drive.google.com/uc?export=download&id=1e1_S5mjjyM6nhtRyp5MAO4jKf3CSlu3X')");
   }
 
   //  Adding Functionality to back button
-
   function goback() {
     var prev = Idarray[Idarray.length - 2];
     if (prev === undefined) {
@@ -125,6 +124,7 @@
       $("#header").addClass("header");
       $(".welcome").css("display", "flex");
       $("#nav-logo").css("width", "60px !important");
+      $(".navbar-collapse").removeClass("nav-color");
       $(".navbar-nav").removeClass("nav-color");
       $(".navbar").removeClass("bg-colored");
       $("#Event").css("display", "none");
@@ -132,6 +132,7 @@
       $("#Albums").css("display", "block");
       $(".fetchedPage").remove();
       $(".FolderView").empty();
+      $(".loading-parent").remove();
       //FolderCounter(LatestFolderId);
       Idarray.length = 0;
       Namearray.length = 0;
@@ -159,6 +160,7 @@
     $("#Event").css("display", "none");
     $("#form").css("display", "block");
     $("#Albums").css("display", "block");
+    $(".navbar-collapse").removeClass("nav-color");
     $(".fetchedPage").remove();
     $(".FolderView").empty();
     //FolderCounter(LatestFolderId);
@@ -168,43 +170,18 @@
     $("#list").append("<li onclick='gohome()' class='breadcrumb-item active'>Home</li>");
     document.getElementById("event-after-home").innerHTML = '';
     $(".nav-item").removeClass("active");
-    $("#home-button").addClass("active");
+    // $("#home-button").addClass("active");
+    $(".loading-parent").remove();
 
   });
 
   // Events btn click on navbar -
 
   $("#event-btn").click(function () {
-    if ($("#Home").hasClass("hide")) {
-      $("#Home").removeClass("hide");
-      $("#Home").addClass("show");
-      $("#header").addClass("header");
-      $(".welcome").css("display", "flex");
-      $(".navbar-nav").removeClass("nav-color");
-      $(".navbar").removeClass("bg-colored");
-      $("#nav-logo").css("width", "60px !important");
-      $("#Event").css("display", "none");
-      $("#form").css("display", "block");
-      $("#Albums").css("display", "block");
-      $(".fetchedPage").remove();
-      $(".FolderView").empty();
-      //FolderCounter(LatestFolderId);
-      Idarray.length = 0;
-      Namearray.length = 0;
-      $("#list").empty();
-      $("#list").append("<li onclick='gohome()' class='breadcrumb-item active'>Home</li>");
-      document.getElementById("event-after-home").innerHTML = '';
-      $(".nav-item").removeClass("active");
-      $("#event-btn").addClass("active");
-
-    }
-  });
-
-  // About btn click on navbar -
-  $("#about-btn").click(function () {
     $("#Home").removeClass("hide");
     $("#Home").addClass("show");
     $("#header").addClass("header");
+    $(".navbar-collapse").removeClass("nav-color");
     $(".welcome").css("display", "flex");
     $(".navbar-nav").removeClass("nav-color");
     $(".navbar").removeClass("bg-colored");
@@ -221,18 +198,46 @@
     $("#list").append("<li onclick='gohome()' class='breadcrumb-item active'>Home</li>");
     document.getElementById("event-after-home").innerHTML = '';
     $(".nav-item").removeClass("active");
-    $("#about-btn").addClass("active");
+    //  $("#event-btn").addClass("active");
+    $(".loading-parent").remove();
   });
+
+
+  // About btn click on navbar -
+  $("#about-btn").click(function () {
+    $("#Home").removeClass("hide");
+    $("#Home").addClass("show");
+    $("#header").addClass("header");
+    $(".welcome").css("display", "flex");
+    $(".navbar-nav").removeClass("nav-color");
+    $(".navbar").removeClass("bg-colored");
+    $(".navbar-collapse").removeClass("nav-color");
+    $("#nav-logo").css("width", "60px !important");
+    $("#Event").css("display", "none");
+    $("#form").css("display", "block");
+    $("#Albums").css("display", "block");
+    $(".fetchedPage").remove();
+    $(".FolderView").empty();
+    //FolderCounter(LatestFolderId);
+    Idarray.length = 0;
+    Namearray.length = 0;
+    $("#list").empty();
+    $("#list").append("<li onclick='gohome()' class='breadcrumb-item active'>Home</li>");
+    document.getElementById("event-after-home").innerHTML = '';
+    $(".nav-item").removeClass("active");
+    // $("#about-btn").addClass("active");
+    $(".loading-parent").remove();
+  });
+
 
 
   // webfetch function appends the html content it gets form Websitefetch function from Code.gs
   // This function first removes all previously added elements and then render new.
   // Also perform some changes in styling of fetched html
 
-
-
-
   function webfetch(content) {
+    driveLinks = [];
+    $(".download-btn").remove();
     $(".fetchedPage").remove();
     $(".WebsiteFetch").append("<div class = 'fetchedPage'>" + content + "</div>");
     $(".flip-contents").removeClass("flip-list-view");
@@ -242,7 +247,6 @@
     $(".flip-entry-info a").attr("data-lightbox", "Images");
     imgViewer();
   };
-
 
   // doStuff function executes 4 important functions "Checker" and "getData" from Code.gs and "change" and "updateBreadCrumb" and hide home section and show event section if Home has show class already
 
@@ -254,12 +258,13 @@
       $("#header").removeClass("header");
       $(".welcome").css("display", "none");
       $("#nav-logo").css("width", "50px !important");
-      $(".navbar-nav").addClass("nav-color");
+      $(".navbar-collapse").addClass("nav-color");
       $(".navbar").addClass("bg-colored");
       $("#form").css("display", "none");
       $("#Event").css("display", "block");
       $("#Albums").css("display", "none");
     };
+    $(".empty-folder").remove();
     $(".WebsiteFetch").append("<div class='loading-parent text-center'><div class='loading'></div></div>");
     $(".fetchedPage").remove();
     $(".bttn").remove();
@@ -269,7 +274,6 @@
 
   // This function calls webfetch function and executes Websitefetch function from Code.gs if there some files are present in folder.
   // Also this function render folder cards inside Event section
-
 
   function change(returnedArray) {
 
@@ -302,7 +306,7 @@
           "<div class='card-warper bttn show'>" +
           "<div class='card'>" +
           "<div class='card-body'>" +
-          "<div class='card-title'><h3>" + Folder + "</h3></div>" +
+          "<div class='card-title'><h5>" + Folder + "</h5></div>" +
           "<div class = 'open-folder-btn'><button type='button' class='btn nav-color btn-md'" + "onclick =" +
           "doStuff('" + FoldersId[i] + "')" + ">Open Album</a></div></div></div></div>"
 
@@ -312,13 +316,15 @@
     };
   };
 
-  // send mail whenever sheet updates
+  // Adding mail Functionality
 
   function newmail() {
     google.script.run.sendmail();
   }
 
-  // light Box image Viewer
+  // Light Box setting image links for display and Download
+
+  var driveLinks = [];
 
   function imgViewer() {
     var imglist = $(".flip-entry img");
@@ -326,6 +332,7 @@
     for (i = 0; i < imglist.length; i++) {
       var img = imglist[i];
       var lg_img = lg_imglist[i];
+      driveLinks.push($(lg_img).attr("href"));
       var img_src = $(img).attr("src");
       var img = img_src.split("=");
       img[1] = "=s800";
@@ -334,6 +341,29 @@
       $(".loading-parent").remove();
     }
 
+    $(".lb-closeContainer").prepend(
+      "<a class = 'download-btn' onclick='downloadimg()' href = ' ' download><i class='fas fa-arrow-circle-down'></i></a>"
+    );
+  };
 
+  function downloadimg() {
+    var text = $(".lb-number").text();
+    var count = text.split(" ")[1];
+    var number = parseInt(count);
+    var link = driveLinks[number - 1]
+    console.log(link);
+    link = link.replace("https://drive.google.com/file/d/", "");
+    link = link.replace("/view?usp=drive_web", "");
+    $(".download-btn").attr("href", "https://drive.google.com/uc?export=download&id=" + link);
+    console.log(link);
+  }
+
+
+  // Fixing bugs in Nav bar
+
+  function hideMenu() {
+    $(".navbar-collapse").removeClass("show");
+    $(".navbar-toggler").attr("aria-expanded", "false");
+    $(".navbar-toggler").addClass("collapsed");
   }
 </script>
