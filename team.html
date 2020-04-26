@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>WebD Team</title>
+	<base target="_self">
+	<meta charset="utf-8">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8=" crossorigin="anonymous"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css">
+    <style>
+
+    body {
+        background-color: #e9ecef;
+        font-family: 'Roboto', sans-serif !important;
+        background-color:#e9ecef !important;
+        box-sizing:border-box;
+        display:block;
+        height:100%;
+        overflow-y:auto;
+        overflow-x:hidden;
+    }
+
+    body::-webkit-scrollbar {
+        width: 10px;
+    }
+
+    body::-webkit-scrollbar-track {
+        box-shadow: inset 0 0 5px grey; 
+        border-radius: 0px;
+
+    }
+
+    body::-webkit-scrollbar-thumb {
+        background: #555; 
+        border-radius: 5px;
+        transition:background 0.5s;
+    }
+
+    @media(max-width:768px){
+
+        body::-webkit-scrollbar {
+            display:none!important;
+        }
+    }
+
+    h2{
+        font-weight:400;
+    }
+
+    .navbar {
+        background-color:#00838f !important;
+        box-shadow:none !important;
+        width:100%;
+        height:70px;
+        padding: 10px 5% 10px 2% !important;
+
+    }
+
+    @media(max-width:992px){
+        .navbar {
+        width:100%;
+        height:70px;
+        padding: 0px 0px 0px 0px !important;
+        }
+        .navbar-collapse {
+            background-color: #00838f !important;
+        }
+    }
+
+    .bg-colored{
+        padding: 5px 5%;
+    }
+
+
+    #nav-logo{
+        width:40px;
+    }
+
+    .nav-color{
+        background-color:#00838f !important;
+        color:#fff;
+    }
+
+    #nav-logo{
+        width:50px;
+        height:auto;
+    }
+
+    .nav-item:hover a{
+        color: #8ec6e6 !important;
+        transition: 0.5s;
+    }
+
+    .nav-item{
+        padding: 8px 0px;
+        margin-left: 10px;
+        margin-right: 10px;
+        display:block;
+        width:wrap !important;
+        text-align: center;
+    }
+
+    .collapse.navbar-collapse{
+        z-index:1000;
+    }
+
+    .page-footer{
+        margin-top:300px;
+    }
+
+    .container-one,.container-two,.container-three {
+        margin-top: 45px;
+        width:80%;
+        margin-left:10%;
+    }
+    .container-four {
+        margin-top: 45px;
+        width:90%;
+        margin-left:5%;
+    }
+    .container-one {
+        margin-top: 45px;
+    }
+
+
+    .face.face1 img {
+        padding: 0;
+        border-radius: 15px;
+    }
+
+    .face.face1:hover img {
+        margin:0;
+        padding: 0;
+        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
+        border-bottom-right-radius: 0px;
+        border-bottom-left-radius: 0px;
+    }
+
+    .container-one .card-deck,.container-two .card-deck,.container-three .card-deck {
+        margin-left: auto;
+        margin-right: auto;
+        width:70%;
+    }
+    @media(max-width:1024px){
+        .container-one .card-deck,.container-two .card-deck,.container-three .card-deck {
+            width:90%;
+        }
+    
+        .container-one ,.container-two ,.container-three  {
+            width:100%;
+            margin-left:0;
+        }
+        .container-four .card{
+            width:50% !important;    
+        }
+    }
+
+    @media (max-width: 768px){
+
+        .container-one .card-deck,.container-two .card-deck, .container-three .card-deck{
+            width: 100%;
+         }  
+    
+        .container-one ,.container-two , .container-three, .container-four .card{
+            width: 90%;
+            margin-left:5%;
+        }  
+    
+        .card-title{
+            font-size: 150%;    
+        }
+    }
+
+    @media(max-width:576px){
+        .card.team-member {
+            margin-bottom:150px;
+        }
+        .container-four .card{
+        width:100% !important;     
+        }
+    }
+
+    .container-four .card{
+        margin-left: auto;
+        margin-right: auto;
+        width: 33%;
+        margin-bottom: 20px;
+        
+    }
+
+    .card.team-member {
+        background: transparent !important;
+        color: #000;
+    }
+    .card-deck{
+        margin-bottom:150px;
+    }
+
+    .card-text {
+        text-align:center;
+        font-size:80%;
+    }
+
+    .card.team-member:hover {
+        border-top-right-radius: 20px;
+        border-top-left-radius: 20px;
+        border-bottom-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+        color: #000;
+    }
+
+    .card-hover{
+        transform: translateY(110px);
+        height:300px;
+    }
+
+
+    .card .face.face1 {
+        z-index: 1;
+        transition: transform 0.5s;
+    }
+
+    .card-hover:hover .face.face1 {
+        transform: translateY(-110px);
+        
+    }
+
+    .card .face.face2 {
+        transform: translateY(-200px);
+        visibility: hidden;
+        opacity:0;
+        transition:transform 0.5s ,visibility 0.3s ;
+    }
+
+    .card-hover:hover .face.face2 {
+        background: #fff;
+        border-bottom-right-radius: 20px;
+        border-bottom-left-radius: 20px;
+        transform: translateY(-120px);	
+        opacity:1;
+        visibility: visible;
+    }
+
+    a {
+        text-decoration: none !important;
+        color:inherit;
+    }
+
+    #github {
+        padding-right: 20px;
+    }
+    #github:hover{
+        color:black;
+    }
+
+    #instagram {
+        padding-right: 4px;  
+        padding-left: 4px;
+        margin-right: 20px;
+    }
+
+
+    #instagram:hover {
+        background: radial-gradient(circle at 33% 100%, #FED373 4%, #F15245 30%, #D92E7F 62%, #9B36B7 85%, #515ECF);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+    
+    
+    #slack {
+        padding-right: 20px;
+    }
+
+    .icons {
+        padding-top: 20px;
+    }
+
+
+    /* Float */
+
+    .hvr-float {
+        display: inline-block;
+        vertical-align: middle;
+        -webkit-transform: perspective(1px) translateZ(0);
+        transform: perspective(1px) translateZ(0);
+        box-shadow: 0 0 1px rgba(0, 0, 0, 0);
+        -webkit-transition-duration: 0.3s;
+        transition-duration: 0.3s;
+        -webkit-transition-property: transform;
+        transition-property: transform;
+        -webkit-transition-timing-function: ease-out;
+        transition-timing-function: ease-out;
+    }
+
+    .hvr-float:hover, .hvr-float:focus, .hvr-float:active {
+        -webkit-transform: translateY(-8px);
+        transform: translateY(-8px);
+    }
+
+    /* Float */
+
+    /**** Footer *****/
+
+    .links:hover{
+        color: #8ec6e6 !important;
+    }
+
+    .text-uppercase{
+        margin-top: 4%;
+        padding-top: 15%;
+    }
+
+    .bg-custom1{
+        background-color: #00838f !important;  
+        margin-bottom: 0;
+    }
+
+    /**** Footer *****/
+
+
+    footer .logo-container{
+        display:block;
+        height:auto;
+        width:60%;
+        margin-left:20%;
+    }
+
+    @media (max-width: 600px) {
+        .container-fluid h5,ul,p {
+            text-align:center;
+        }
+    }
+
+    @media (min-width:600px){
+        .container-fluid .iitj h5,p{
+            text-align:right;
+        }
+    }
+
+    .footer-copyright {
+        overflow: hidden;
+        color: rgba(255,255,255,0.6);
+        background-color: rgba(0,0,0,0.2);
+    }
+
+</style>
+
+</head>
+<body class="team">
+	<header id="header" class = "header">
+        <div class="container-fluid" style="padding-right: 0px; padding-left: 0px;">
+	        <nav class="navbar navbar-expand-lg navbar-dark">
+	            <a class="navbar-brand" href="https://anshultilondiya.github.io/SDA/"><img id="nav-logo" src="https://drive.google.com/uc?export=download&id=1-Qk1PT_5ZviofklCR462a3x3Uy_g6ZjO" style="width: 50px;"></a>
+	            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#basicExampleNav"
+	                aria-controls="basicExampleNav" aria-expanded="false" aria-label="Toggle navigation">
+	                <span class="navbar-toggler-icon"></span>
+	            </button>
+	            <div class="collapse navbar-collapse" id="basicExampleNav">
+	                <ul class="nav navbar-nav ml-auto">
+	                    <li  id="home-button" class="nav-item home-btn">
+	                        <a class="nav-link" id = "home-btn" target="_top" href="https://anshultilondiya.github.io/SDA/" style="color: #fff;">Home</a>
+	                    </li>
+	                    <li id ="event-btn" class="nav-item">
+	                        <a class="nav-link" href="https://students.iitj.ac.in/society/design-and-art/" style="color: #fff;">SDA Team</a>
+	                    </li>
+	                </ul>
+	            </div>
+	        </nav>
+    	</div>
+    </header>
+	<h2 style="color: #000; text-align: center; font-size: 60px; margin-top: 50px;">OUR TEAM</h2>
+	<div class="container-one">
+		<div class="card-deck">
+			<div class="card team-member text-center border-0  wow fadeInLeftBig">
+            <div class = "card-hover" >
+				<div class="face face1">
+					<img class="card-img-top" style="height: 300px" src="https://drive.google.com/uc?export=download&id=1_Sv4qFkXzbl50CacP9L1jcohGdvB8On8">
+				</div>
+				<div class="card-body face face2">
+					<div class="content">
+						<h3 class="card-title">Anshul Ahuja</h3>
+						<h3><p class="card-text">Designation</p></h3>
+						<h5><a href="mailto:ahuja.2@iitj.ac.in" style="color: #000;">ahuja.2@iitj.ac.in</a></h5>
+						<div class="row"style=" justify-content: space-around; padding-top: 1vh;">
+							<div>
+								<a href="https://github.com/anshulahuja98" id="github" class="hvr-float" target="_blank"><i class="fa fa-github" style="font-size:250%" ></i></a>
+								<a href="https://www.instagram.com/__anshul_ahuja/" id="instagram" class="hvr-float" target="_blank"><i class="fa fa-instagram" style="font-size:250%"></i></a>
+								<a href="https://www.facebook.com/AnshulAhuja1998" id="facebook" class="hvr-float" target="_blank"><i class="fa fa-facebook-square" style="font-size:250%"></i></a>
+							</div>								
+						</div>
+					</div>
+				</div>  
+            </div>
+			</div>
+			<div class="card team-member text-center border-0  wow fadeInRightBig">
+            <div class = "card-hover" >
+				<div class="face face1">
+					<img class="card-img-top" style="height: 300px" src="https://drive.google.com/uc?export=download&id=1gcJGAEM3FSW2L5w5sdRIiCinlAqHL4eK">
+				</div>
+				<div class="card-body face face2">
+					<div class="content">
+						<h3 class="card-title">Soham Sonawane</h3>
+						<h3><p class="card-text">Designation</p></h3>
+						<h5><a href="mailto:sonawane.1@iitj.ac.in" style="color: #000;">sonawane.1@iitj.ac.in</a></h5>
+						<div class="row"style=" justify-content: space-around; padding-top: 1vh;">
+							<div>
+								<a href="https://github.com/killbotXD" id="github" class="hvr-float" target="_blank"><i class="fa fa-github" style="font-size:250%" ></i></a>
+								<a href="https://www.instagram.com/_kousei.arima_/" id="instagram" class="hvr-float" target="_blank"><i class="fa fa-instagram" style="font-size:250%"></i></a>
+								<a href="https://www.facebook.com/soham.sonawane1" id="facebook" class="hvr-float" target="_blank"><i class="fa fa-facebook-square" style="font-size:250%"></i></a>
+							</div>								
+						</div>
+					</div>
+				</div>
+            </div>
+			</div>
+		</div>
+	</div>
+	<div class="container-two">
+		<div class="card-deck">
+			<div class="card team-member text-center border-0  wow fadeInLeftBig">
+            <div class = "card-hover" >
+				<div class="face face1">
+					<img class="card-img-top" style="height: 300px" src="https://drive.google.com/uc?export=download&id=1wV_wfdVgUMwVGrwI5C8pzmOzTuZTSVTA">
+				</div>
+				<div class="card-body face face2">
+					<div class="content">
+						<h3 class="card-title">Anshul Tilondiya</h3>
+						<h3><p class="card-text">Developer</p></h3>
+						<h5><a href="mailto:tilondiya.1@iitj.ac.in" style="color: #000;">tilondiya.1@iitj.ac.in</a></h5>
+						<div class="row"style=" justify-content: space-around; padding-top: 1vh;">
+							<div>
+								<a href="https://github.com/Anshultilondiya" id="github" class="hvr-float" target="_blank"><i class="fa fa-github" style="font-size:250%" ></i></a>
+								<a href="https://www.instagram.com/anshul_tilondiya/" id="instagram" class="hvr-float" target="_blank"><i class="fa fa-instagram" style="font-size:250%"></i></a>
+								<a href="https://www.facebook.com/anshul.tilondiya" id="facebook" class="hvr-float" target="_blank"><i class="fa fa-facebook-square" style="font-size:250%"></i></a>
+							</div>								
+						</div>
+					</div>
+                </div>
+			</div>
+			</div>
+			<div class="card team-member text-center border-0 wow fadeInRightBig">
+            <div class = "card-hover" >
+				<div class="face face1">
+					<img class="card-img-top" style="height: 300px" src="https://drive.google.com/uc?export=download&id=12PCEihK7kq9w4zdjJoTSivBioe2jf1pY">
+				</div>
+				<div class="card-body face face2">
+					<div class="content">
+						<h3 class="card-title">Yashvi Ramanuj</h3>
+						<h3><p class="card-text">Developer</p></h3>
+						<h5><a href="mailto:yashvi.1@iitj.ac.in" style="color: #000;">yashvi.1@iitj.ac.in</a></h5>
+						<div class="row"style=" justify-content: space-around; padding-top: 1vh;">
+							<div>
+								<a href="https://github.com/YashviRamanuj" id="github" class="hvr-float" target="_blank"><i class="fa fa-github" style="font-size:250%" ></i></a>
+								<a href="https://www.instagram.com/yashviramanuj/" id="instagram" class="hvr-float" target="_blank"><i class="fa fa-instagram" style="font-size:250%"></i></a>
+								<a href="https://www.facebook.com/yashvi.ramanujp" id="facebook" class="hvr-float" target="_blank"><i class="fa fa-facebook-square" style="font-size:250%"></i></a>
+							</div>								
+						</div>
+					</div>
+                </div>
+			</div>
+			</div>
+		</div>
+	</div>
+	<div class="container-three">
+		<div class="card-deck">
+			<div class="card team-member text-center border-0 wow fadeInLeftBig">
+            <div class = "card-hover" >
+				<div class="face face1">
+					<img class="card-img-top" style="height: 300px" src="https://drive.google.com/uc?export=download&id=17ky28nY7PEqM7BlMASXspYMeEo_6znON">
+				</div>
+				<div class="card-body face face2">
+					<div class="content">
+						<h3 class="card-title">Darshit Jain</h3>
+						<h3><p class="card-text">Developer</p></h3>		
+						<h5><a href="mailto:jain.38@iitj.ac.in" style="color: #000;">jain.38@iitj.ac.in</a></h5>
+						<div class="row"style=" justify-content: space-around; padding-top: 1vh;">
+							<div>
+								<a href="https://github.com/DarshitJain04" id="github" class="hvr-float" target="_blank"><i class="fa fa-github" style="font-size:250%" ></i></a>
+								<a href="https://www.instagram.com/jain_darshit_/" id="instagram" class="hvr-float" target="_blank"><i class="fa fa-instagram" style="font-size:250%"></i></a>
+								<a href="https://facebook.com/darshit.jain.9250" id="facebook" class="hvr-float" target="_blank"><i class="fa fa-facebook-square" style="font-size:250%"></i></a>
+							</div>								
+						</div>
+					</div>
+                </div>
+			</div>
+		    </div>
+			<div class="card team-member text-center border-0 wow fadeInRightBig">
+            <div class = "card-hover" >
+				<div class="face face1">
+					<img class="card-img-top" style="height: 300px" src="https://drive.google.com/uc?export=download&id=1KB8Z1Y5DozH7q5yCzj8Mkr8kxXJoaO4_">
+				</div>
+				<div class="card-body face face2">
+					<h3 class="card-title">Abhishek Raghav</h3>
+					<h3><p class="card-text">Developer</p></h3>
+					<h5><a href="mailto:raghav.1@iitj.ac.in" style="color: #000;">raghav.1@iitj.ac.in</a></h5>
+					<div class="row"style=" justify-content: space-around; padding-top: 1vh;">
+						<div>
+							<a href="https://github.com/imraghav20" id="github" class="hvr-float" target="_blank"><i class="fa fa-github" style="font-size:250%" ></i></a>
+							<a href=" https://www.instagram.com/imraghav20/" id="instagram" class="hvr-float" target="_blank"><i class="fa fa-instagram" style="font-size:250%"></i></a>
+							<a href="https://www.facebook.com/people/Abhishek-Raghav/100046265702807" id="facebook" class="hvr-float" target="_blank"><i class="fa fa-facebook-square" style="font-size:250%"></i></a>
+						</div>								
+					</div>
+				</div>
+            </div>
+			</div>
+		</div>
+	</div>
+    <div class="container-four">
+		<div class="card team-member text-center border-0 wow fadeInUpBig">
+        <div class = "card-hover" >
+			<div class="face face1">
+				<img class="card-img-top" style="height: 300px" src="https://drive.google.com/uc?export=download&id=1MPxHk1OSy0Wx1uX_w1l4stLj2dILltVL">
+			</div>
+			<div class="card-body face face2">
+				<h3 class="card-title">Aditi Goyal</h3>
+				<h3><p class="card-text">Developer</p></h3>
+				<h5><a href="mailto:goyal.16@iitj.ac.in" style="color: #000;">goyal.16@iitj.ac.in</a></h5>
+				<div class="row"style=" justify-content: space-around; padding-top: 1vh;">
+					<div>
+						<a href="https://github.com/gaditi123" id="github" class="hvr-float" target="_blank"><i class="fa fa-github" style="font-size:250%" ></i></a>
+						<a href="https://www.instagram.com/aditi.xyz/" id="instagram" class="hvr-float" target="_blank"><i class="fa fa-instagram" style="font-size:250%"></i></a>
+						<a href="https://www.facebook.com/aditi.goyal.9085" id="facebook" class="hvr-float" target="_blank"><i class="fa fa-facebook-square" style="font-size:250%"></i></a>
+					</div>								
+				</div>
+            </div>
+        </div>
+		</div>
+    </div>
+	<footer class="page-footer font-small bg-custom1">
+	<div class="container">
+	<div class="container-fluid">
+	    <div class="row">
+            <div class="col-sm">
+                <h5 class="text-uppercase h5-responsive font-weight-bold" style="color: #fff;">Find Us At</h5>
+
+                <ul class="list-unstyled">
+                <li>
+                    <a class="links" href="http://www.iitj.ac.in/" style="color: #fff;" target="_blank">IIT Jodhpur</a>
+                </li>
+                <li>
+                    <a class="links" href="https://students.iitj.ac.in/" style="color: #fff;" target="_blank">IITJ Gymkhana</a>
+                </li>
+                <li>
+                    <a class="links" href="https://github.com/devlup-labs" style="color: #fff;" target="_blank" >DevlUp Labs</a>
+                </li>
+                
+                </ul>
+
+            </div>
+            <div class="col-sm">      
+                <div class="logo-container">
+                    <img src="https://drive.google.com/uc?export=download&id=1B6jxY5kumO2lfJnD0x3bUI4QhmteIBX2" width=100% height=100%>
+                </div>
+            </div>
+            <div class="col-sm mx-auto">
+            <div class="iitj">
+                <h5 class="h5-responsive text-uppercase font-weight-bold" style="color: #fff;">Indian Institute of Technology, <br> Jodhpur</h5>
+                <p style="color: #fff;">NH 65, Surpura Bypass Rd<br>Karwar,<br>Rajasthan 342037</p>
+            </div>
+            </div>
+	    </div>
+	</div>
+	</div>
+
+	<!-- Copyright -->
+	    <div class="footer-copyright text-center py-3">© 2020, made with  <i class="fa fa-heart"></i> by <a class="links" target="_self" href="<?= ScriptApp.getService().getUrl(); ?>?v=team" style="color: #fff;"><b> SDA WebD Team</b> </a>for Student Design and Art Society
+	    
+	    </div>
+	<!-- Copyright -->
+
+    </footer>
+    
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/wow/1.1.2/wow.min.js"></script>
+	
+	<script>
+		new WOW().init();
+	</script>
+    
+    <script>
+        $(".card-hover").hover(function(){
+        $(this).css("height", "350px");
+        }, function(){
+        $(this).css("height", "300px");
+    });
+        
+    console.log("team")
+
+    
+    
+    </script>
+    
+</body>
+</html>
