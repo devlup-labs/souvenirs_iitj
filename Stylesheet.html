@@ -179,35 +179,75 @@
 	}
       
 <--! navbar -->
-      .navbar {
-    padding-top:20px !important;
-    background: transparent !important;
-    padding: 0 50px;
-    height: 80px;
-    box-shadow:none !important;
-    }
-    
-      .navbar-brand{
-      margin-right:100px !important;
-      }
+      .navbar-collapse{
+	background-color:rgba(0,0,0,0.7);
+	z-index:999;
+	}
 
-      .navbar-brand img{
-      width:80px;
-      height:auto;
-      }
 
-      .nav-item{
-      margin: 0 20px !important;
-      display:block;
-      width:100px;
-      text-align: center;
-      }
-      
-<--! search button -->
-      
-      .form-inline{
-      margin-right:100px;
-      }
+
+	.navbar {
+	box-shadow:none !important;
+	width:100%;
+	height:60px;
+	padding: 10px 5% 10px 2% !important;
+
+	}
+
+	@media(max-width:992px){
+	.navbar {
+	width:100%;
+	height:60px;
+	padding: 0px 0px 0px 0px !important;
+	}
+
+	.bg-colored{
+	padding: 5px 5%;}
+
+
+	#nav-logo{
+	width:40px;
+	}
+
+	}
+
+	.bg-colored{
+	height:70px;
+	padding: 10px 5%;
+	background-color:#00838f !important;
+	}
+
+	.nav-color{
+	background-color:#00838f !important;
+	color:#fff;
+	}
+
+	#nav-logo{
+	width:50px;
+	height:auto;
+	}
+
+	.nav-item{
+	padding: 8px 0px;
+	margin-left: 10px;
+	margin-right: 10px;
+	display:block;
+	width:wrap !important;
+	text-align: center;
+	transition:background-color 0.2s;
+	}
+	.nav-link:hover{
+	background-color:rgba(255,255,255,0.2) !important;
+	}
+
+	.navbar-toggler{
+	z-index:999;
+	}
+
+	#Home{
+	width: 90%;
+	margin-left:5%;
+	}    
 
 <--! welcome message and navbar buttons -->
       .display-5{
