@@ -1274,22 +1274,33 @@
     
 <--! footer -->
    .links:hover{
-	color: #8ec6e6;
+	color: #8ec6e6 !important;
 	}
-    .text-uppercase{
-    margin-top: 4%;
-    padding-top: 4%;
-    }
-    .bg-custom1{
-    background-color: #00838f !important;  
-    margin-bottom: 0;
-    }
-     footer .logo-container{
-     display:block;
-     height:auto;
-     width:16%;
-     margin-left:42%;
-     }
-      
+	.text-uppercase{
+	margin-top: 4%;
+	padding-top: 15%;
+	}
+	.bg-custom1{
+	background-color: #00838f !important;  
+	margin-bottom: 0;
+	}
+
+	@media (max-width: 600px) {
+	  .container-fluid h5,ul,p {
+	    text-align:center;
+	  }
+	}
+	@media (min-width:600px){
+	.container-fluid .iitj h5,p{
+	      text-align:right;
+	      }
+	   }
+	
+	footer .logo-container{
+	display:block;
+	height:auto;
+	width:60%;
+	margin-left:20%;
+	}
 
 </style>
