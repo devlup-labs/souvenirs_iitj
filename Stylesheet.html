@@ -716,66 +716,74 @@
 	width:100%;
 	text-align:center;
 	}
+	
+	.show{						/* used to hide or shw folders*/
+	display:inline-block !important;
+	}
+
+	.hide{
+	display:none !important;
+	}
 
       
 <--! breadcrumb -->
       .breadcrumb-item{
-      cursor:pointer;
-     
-      }
-      
-      .breadcrumb{
-      border-radius:0px !important;
-      }
-      
-      .breadcrumb-item{
-      text-transform:capitalize;
-      }
-      
-      
-      #Event{
-     display:none;
-     } 
+	cursor:pointer;
+	z-index:999;
+
+	}
+
+	.breadcrumb{
+	border-radius:0px !important;
+
+	}
+
+	.breadcrumb-item{
+	text-transform:capitalize;
+	}
       
       
-     #event-after-home{                         <--! text added to header once folder is clicked -->
-     display:flex;
-     width:100%;
-     height:100%;
-     align-items:center;
-     justify-content:center;
-     font-size:400%;
-     font-weight:bold;
-     text-transform:uppercase;
-     letter-spacing:2px;
-     
-     } 
+     #Event{
+	display:none;
+	} 
+      
+      
+     #event-after-home{
+	text-align:center;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	font-size:350%;
+	text-transform:capitalize;
+	letter-spacing:2px;
+	color: black;
+
+	} 
       
       #list{
-      letter-spacing:2px;
-      }
+	letter-spacing:2px;
+	}
       
-      #home-btn{
-      cursor:pointer !important;
-      }
+     #home-btn{
+	cursor:pointer !important;
+	}
       
         li.disabled {
-        pointer-events: none;
-         cursor: default;
-        }
-        
-        li.enabled{
-        cursor: pointer;
-        }
+	pointer-events: none;
+	cursor: default;
+	}
+
+	li.enabled{
+	cursor: pointer;
+	}
       
 <--! back button -->
       #backbtn{
-      position:absolute;
-      top:40%;
-      left:80px;
-      background-color:#00838f !important;
-      letter-spacing:2px;
-      }
+	background-color:#00838f !important;
+	letter-spacing:2px;
+	margin-left:50px;
+	}
+
       
 <--! flip grid (images display) -->
       
