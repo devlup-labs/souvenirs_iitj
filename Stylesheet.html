@@ -570,75 +570,153 @@
 	}
 
 <--! albums, dropdown box and years button -->
-      .Albums{
-      height:100vh;}
       
-      .Album-head{
-      font-size:150%;
-     
-      }
-      
-      .Album-selector{
-      margin : 50px;
-      
-      }
-      
-      
-      .dropdown-item{
-      cursor:pointer;
-      }
-      
-      .dropdown-toggle{
-      padding:10px 50px !important;}
+	.Albums{
+	min-height:100vh;
+	}
 
-<--! cards -->
-      .card-warper{
-      width:20%;
-      display:inline-block;
-      margin:50px 2.5%;
-      }
-      
 
-      .card{
-      height:350px;
-      width:200px;
-      }
-      
-      
-      .card-body{
-      display:block!important;
-      }
-      
-      .card-title{
-      display:block !important;
-      height:90px;
-      }
-      
-      .card-title h3{
-      font-size:120%;
-      }
-      
-      .bttn{                              <--! not in use in current html code -->
-     width: 100px;
-     height: 50px;
-     background-color: #8ec6c5;
-     margin: 50px;
-     text-align:center;
-     padding-top:10px;
-     cursor:pointer;
-     display:inline-block;
-     
-     }
-    
+	.Album-head{
+	font-size:150%;
 
-     
-     .show{                                     <--! used to show and hide cards on clicking buton --> 
-     display:inline-block !important;
-     }
-     
-     .hide{
-     display:none !important;
-     }
+	}
+
+	.Album-selector{
+	margin : 50px 0;
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	}
+
+
+	.dropdown-item{
+	cursor:pointer;
+	}
+	
+	.dropdown-toggle{
+	padding:10px 50px !important;}
+
+	@media(max-width:576px){
+
+	.dropdown-toggle{
+	padding:10px 20px !important;}
+
+	}
+
+
+
+<!-- FolderView -->
+	
+	.FolderView {
+	height:fit-content;
+	padding:0 80px;
+	}
+	
+	
+	.FolderView .card-title h5{
+	font-size:120% !important;
+	text-transform:capitalize;
+	letter-spacing:1px;
+	}
+
+      .bg-custom2{
+	background: #00838f;
+	color:#00838f !important;
+	}
+	.btn:hover {
+	background:#00838f;
+	color: #f4f4f4 !important;
+	transition: 0.4s ease-in;
+
+	}
+	#year_btn{
+	width:100%;
+	}
+
+
+	.open-folder-btn{
+	width:100%;
+	display:flex;
+	}
+
+
+	.open-folder-btn .btn {
+	margin:auto;
+	color:#fff;
+	}
+	
+	.card-warper{
+	width:20% !important;
+	height:fit-content;
+	display:inline-block;
+	margin:50px 2.5%;
+	transition: box-shadow 0.2s, transform 0.3s;
+	border-radius:5px !important;
+	overflow:hidden;
+	}
+
+	.card-warper:hover{
+	box-shadow:0 5px 20px 5px #aaa;
+	transform:scale(1.05);
+	}
+
+	@media(max-width:1024px){
+	.card-warper{
+	width:29.3% !important;
+	margin:50px 2.0%!important;
+	}
+	}
+
+	@media(max-width:992px){
+	.card-warper{
+	width:29.3% !important;
+	margin:50px 2.0%!important;
+	}
+
+	}
+
+	@media(max-width:768px){
+	.card-warper{
+	width:45% !important;
+	margin:50px 2.5% !important;
+	}
+
+	}
+
+	@media(max-width:576px){
+	.card-warper{
+	width:90% !important;
+	margin:50px 5% !important;
+	}
+
+
+
+	.Albums ,.FolderView{
+	height:fit-content;
+	padding:0 20px !important;
+	}
+
+	}
+
+
+	.card{
+	width:auto;
+	padding:10px;
+	}
+
+
+	.card-body{
+	display:block!important;
+	padding-bottom:20px;
+	}
+
+	.card-title{
+	display:block !important;
+	height:50px;
+	width:100%;
+	text-align:center;
+	}
+
       
 <--! breadcrumb -->
       .breadcrumb-item{
