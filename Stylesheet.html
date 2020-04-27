@@ -875,6 +875,11 @@
 	display:inline-block;
 
 	}
+	
+	.col-lg-12{
+	display:block;
+	width:100%;
+	}
 
       
 <--! Website Fetch -->
@@ -953,7 +958,83 @@
 	      -webkit-transform: rotate(360deg)
 	    }
 	  }
+	
+<!-- Lightbox Gallery -->
+	
+	.download-btn{
+	display:inline-block;
+	width:60%;
+	text-align:end;
+	}
 
+	.lb-close{
+	display:inline-block;
+	width:40%;
+	}
+
+	.download-btn:link,
+	.download-btn:visited{
+	font-size:180%;
+	color:rgb(204, 204, 204);
+	}
+
+	.download-btn:focus,
+	.download-btn:hover{
+	color:#fff;
+	}
+
+
+	.lb-data{
+	display:flex;
+	}
+
+	.lb-details{
+	flex: 1 0 70%;
+	}
+
+	.lb-closeContainer{
+	flex:1 0 30%;
+	}
+
+
+	@media(max-width:400px){
+	.download-btn{
+	width:50%;
+	}
+
+	.lb-close{
+	width:50%;
+	}
+	}
+	
+	.lb-nav a.lb-next{
+	width:50% !important;
+	} 
+
+	.lb-nav a.lb-prev{
+	width:50% !important;
+	}
+
+	.lightboxOverlay{
+	width:100% !important;
+	}
+
+
+	.lightbox{
+	display:flex;
+	flex-direction:column-reverse;
+	width:100%;
+	position:fixed !important;
+	top:15% !important;
+	left:0;
+	}
+
+
+	@media(min-width:992px){
+	.lightbox{transform:scale(1.15);
+	}
+
+	}
       
 <--! form -->
       .formbackground{
