@@ -212,36 +212,115 @@
         </div>
     
   <!------------------------------- Form -------------------------------------->
-  <div id = "form">
-   <div class="formbackground">
-	<div class="agile-volt">
-		
-		<div class="agile-voltsub">
-			<h2>Application form</h2>
-				<form action="#" method="post">
-					<div class="agile-name">
-						<p>Name :</p>
-						<input type="text" name="username" placeholder="" required="" autofocus>
-					</div>
-						
-					<div class="agile-email">
-						<p>E-mail :</p>
-						<input type="email" name="email" placeholder="" required="">
-					</div>	
-									
-					<div class="agile-week">
-						<p>Description :</p>
-						<textarea></textarea>
-					</div>
-					<div class="clear"></div>
-					<input type="submit" value="submit" />
-				</form>
-		</div>	
-	</div>
-	</div>
-   
-   </div>
-    <!-- FORM -->
+   <div id="form">
+            <div class="formbackground">
+                <div class="agile-volt">
+
+                    <div class="agile-voltsub">
+                        <h2>Application form</h2>
+                        <script type="text/javascript">
+                            var submitted = false;
+                        </script>
+                        <iframe name="hidden_iframe" id="hidden_iframe" style="display:none;"
+                            onload="if(submitted) {window.location='https://anshultilondiya.github.io/SDA/'}"></iframe>
+                        <form id="user_photo_submit" name="form"
+                            action="https://docs.google.com/forms/u/0/d/e/1FAIpQLScF4NhjhqdSy4DmmYeQv-bg8PnQFSCiCxezM1VSMF_eKHYPYg/formResponse"
+                            method="POST" target="hidden_iframe" onsubmit="submitted=true;">
+                            <div class="agile-name">
+                                <p>Name :</p>
+                                <input type="text" name="entry.1853692475" placeholder="Name" required=""
+                                    onchange="botchecker()">
+                            </div>
+
+                            <div class="agile-email">
+                                <p>E-mail :</p>
+                                <input type="email" name="entry.1741081402" placeholder="E-mail" required="">
+                            </div>
+
+                            <div class="agile-week">
+                                <p>Description :</p>
+                                <textarea id="description" type="text" name="entry.1159372315"
+                                    placeholder="Description for your photograph"></textarea>
+                            </div>
+                            <div class="agile-week">
+                                <p>Link :</p>
+                                <textarea onchange="is_url()" id="drivelink" type="drivelink" name="entry.1752709935"
+                                    placeholder="Google drive link where the photos are stored" required=""></textarea>
+                            </div>
+                            <div class="clear"></div>
+                            <input id="checkid" type="submit" id="submit" value="Submit" />
+                            <input type="hidden" id="token" name="token">
+                        </form>
+
+                        <script>
+                            var valid_url
+
+                            function is_url() {
+
+                                regexp =
+                                    /^(?:(?:https?|ftp):\/\/)?(?:(?!(?:10|127)(?:\.\d{1,3}){3})(?!(?:169\.254|192\.168)(?:\.\d{1,3}){2})(?!172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2})(?:[1-9]\d?|1\d\d|2[01]\d|22[0-3])(?:\.(?:1?\d{1,2}|2[0-4]\d|25[0-5])){2}(?:\.(?:[1-9]\d?|1\d\d|2[0-4]\d|25[0-4]))|(?:(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)(?:\.(?:[a-z\u00a1-\uffff0-9]-*)*[a-z\u00a1-\uffff0-9]+)*(?:\.(?:[a-z\u00a1-\uffff]{2,})))(?::\d{2,5})?(?:\/\S*)?$/;
+
+                                var str = document.getElementById("drivelink").value;
+                                if (str == '') {
+                                    document.getElementById("checkid").disabled = false;
+                                    alert("Please enter a valid link");
+                                } else if (regexp.test(str)) {
+                                    document.getElementById("checkid").disabled = false;
+                                    valid_url = true;
+                                    if (valid_url) {
+                                        $("#checkid").attr("onclick", "submitresp()");
+                                    }
+                                    return true;
+                                } else {
+                                    document.getElementById("checkid").disabled = true;
+                                    alert("Please enter a valid link");
+                                    return false;
+                                }
+
+                            }
+                        </script>
+
+                        <script>
+                            var tokenValue = '';
+                            var response = '';
+                            grecaptcha.ready(function () {
+                                grecaptcha.execute('6Ld_YuwUAAAAAB4xN1J-A3NN83Xr-c6HxtLLy4Vz', {
+                                    action: 'homepage'
+                                }).then(function (token) {
+                                    tokenValue = token;
+                                    //  console.log(token);
+                                    //document.getElementById("token").value = token;
+                                });
+                            });
+
+                            function botchecker() {
+                                google.script.run.withSuccessHandler(notice).processForm(tokenValue);
+
+                            }
+
+                            function notice(resp) {
+                                console.log($("#user_photo_submit").attr("action"))
+                                response = resp;
+                                if (resp == 'You are a robot') {
+                                    // console.log(resp)
+                                    // $("#user_photo_submit").attr("action"," ");
+                                }
+                                /*else{
+                                 $("#user_photo_submit").attr("action","#");
+                                 }*/
+                                //console.log($("#user_photo_submit").attr("action"))
+                            }
+
+                            function submitresp() {
+                                alert(response);
+
+                            }
+                        </script>
+                    </div>
+                </div>
+            </div>
+        </div>
+    <!--------------- FORM ----------------->
   
 <!-- -----------Footer ------------->
   
