@@ -68,43 +68,42 @@
 
                     
                 </ul>
-                <!-- Links -->
-
-                <form class="form-inline">
-                    <div class="md-form my-0">
-                        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
-                </div>
-            </form>
-        </div>
-        <!-- Collapsible content -->
-
+           <!-- Collapsible content -->
     </nav>
     <!--/.Navbar-->
-    <div class = welcome>
-    <div class ="welcomeMsg">
-        <h1>Welcome</h1>
-        <h3>To</h3>
-        <div id="typed-strings">
-          <p>SDA</p>
-          <p>Student Design and Arts Society</p>
-        </div>
-        <span id="typed"></span>
-        <script>
-          var typed = new Typed('#typed', {
-            stringsElement: '#typed-strings',
-            backSpeed: 40,
-            typeSpeed: 40,
-            loop: true,
-            loopCount: Infinity,
-            cursorChar: ' _',
-          });
-        </script>
-      </div>
-      <div class = "nav-btns">
-      <a href = "#" class = "nav-btn">About us </a>
-      <a href = "#" class = "nav-btn">Events </a>
-      </div>
-      </div>
+	    <div class="welcome-container">
+                <div class="welcome">
+                    <div class="welcomeMsg">
+                        <h1 class="text-center">Welcome</h1>
+                        <h3 class="text-center">To</h3>
+                        <svg width="100%" height="100%">
+                            <!-- Symbol-->
+                            <symbol id="s-text">
+                                <text text-anchor="middle" x="50%" y="15%" dy=".20em">Student Design </text>
+                                <text text-anchor="middle" x="50%" y="45%" dy=".20em">And</text>
+                                <text text-anchor="middle" x="50%" y="75%" dy=".20em">Arts Society</text>
+                            </symbol>
+                            <!-- Duplicate symbols-->
+                            <use class="text" xlink:href="#s-text"></use>
+                            <use class="text" xlink:href="#s-text"></use>
+                            <use class="text" xlink:href="#s-text"></use>
+                            <use class="text" xlink:href="#s-text"></use>
+                            <use class="text" xlink:href="#s-text"></use>
+                        </svg>
+                    </div>
+                    <div class="nav-btns">
+                        <div class="row mx-auto">
+                            <div class="col-xs-6">
+                                <a href="#About" class="nav-btn d-block m-2">About us </a>
+                            </div>
+                            <div class="col-xs-6">
+                                <a href="#Albums" class="nav-btn d-block m-2">Events </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    
 </header>
     
  
