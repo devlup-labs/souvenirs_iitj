@@ -7,7 +7,7 @@
   integrity="sha256-pasqAKBDmFT4eHoN2ndd6lN370kFiGUFyTiUHWhU7k8="
   crossorigin="anonymous"></script>
   <script src="https://cdn.jsdelivr.net/npm/typed.js@2.0.11"></script>
-  
+   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.8.2/css/all.css">
     <!-- Google Fonts -->
@@ -16,11 +16,26 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/css/bootstrap.min.css" rel="stylesheet">
     <!-- Material Design Bootstrap -->
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.15.0/css/mdb.min.css" rel="stylesheet">
-  
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.2/animate.min.css" rel="stylesheet">
+    <!--fonts-->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Lato:300,400,700,400italic%7CJosefin+Sans:400,700,300italic">
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/lightbox2/2.11.1/css/lightbox.min.css">
+      <!-- recapcha -->
+    <script src="https://www.google.com/recaptcha/api.js?render=6Ld_YuwUAAAAAB4xN1J-A3NN83Xr-c6HxtLLy4Vz"></script>
   </head>
   <body>
+	  <!--preloader-->
+	     <div class="demo" id="demo">
+        <div class="cp-preloader cp-preloader_type4">
+            <span class="cp-preloader__letter" data-preloader="S">S</span>
+            <span class="cp-preloader__letter" data-preloader="D">D</span>
+            <span class="cp-preloader__letter" data-preloader="A">A</span>
+        </div>
+        <div id="status">&nbsp;</div>
+    </div>
   
-
+<div id="website-body">
    <header id="header" class = "header">
         <!--Navbar-->
         <nav class="navbar navbar-expand-lg navbar-dark">
@@ -222,3 +237,46 @@
 
 </footer>
 <!---------------------- Footer ----------------->
+</div>
+    <!----------------- website-body end -------------->
+
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js">
+    </script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript"
+        src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.15.0/js/mdb.min.js">
+    </script>
+
+
+
+    <?!= include('JavaScript'); ?>
+
+
+    <!-- preloader -->
+    <script>
+        document.onreadystatechange = function () {
+            if (document.readyState !== "complete") {
+                document.querySelector(
+                    "#website-body").style.display = "none";
+                document.querySelector(
+                    "#demo").style.visibility = "visible";
+
+
+
+            } else {
+                document.querySelector(
+                    "#demo").style.display = "none";
+                document.querySelector(
+                    "#website-body").style.display = "block";
+
+            }
+        };
+        
+        
+    </script>
+
