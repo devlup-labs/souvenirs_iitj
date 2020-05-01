@@ -30,7 +30,7 @@ function include(filename) {
 
 // This function is used to return two array of child folders and child folder's Id , where agrument is Parent Folder's Id
 
-function folderNamesandIds(parentFolder) {
+function folderNamesAndIds(parentFolder) {
 
   let folderNames = [];
   let folderIds = [];
@@ -55,7 +55,7 @@ function checker(parentFolderId) {
     doesParentFolderHaveFiles = true;
   }
 
-  let [folderNames, folderIds] = folderNamesandIds(parentfolders);
+  let [folderNames, folderIds] = folderNamesAndIds(parentfolders);
 
   return [folderNames, doesParentFolderHaveFiles, folderIds, parentFolderId]
 }
@@ -65,7 +65,7 @@ function checker(parentFolderId) {
 
 function yearBtn() {
   const sdaWebsiteFolder = DriveApp.getFolderById('127DYBOd4M98t6KNCJeZ9Y6WJB7B5wb_3').getFolders();
-  let [folderNames, folderIds] = folderNamesandIds(sdaWebsiteFolder);
+  let [folderNames, folderIds] = folderNamesAndIds(sdaWebsiteFolder);
   let folderList = [];
   for (i = 0; i < folderNames.length; i++) {
     let list = {
@@ -95,7 +95,7 @@ function yearBtn() {
 
 function cardsDisplay(yearFolderId) {
   const Folders = DriveApp.getFolderById(yearFolderId).getFolders();
-  let [folderNames, folderIds] = folderNamesandIds(Folders);
+  let [folderNames, folderIds] = folderNamesAndIds(Folders);
   return [folderNames, folderIds];
 
 }
