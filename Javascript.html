@@ -10,7 +10,6 @@
     folderCounter(folderId[0]);
   };
 
-
   function folderCounter(folderId) {
     $(".cards-holder").empty();
     $(".cards-holder").append("<div class='loading-parent text-center'><div class='loading'></div></div>");
@@ -18,7 +17,6 @@
     document.getElementById("year_btn").innerHTML = name;
     google.script.run.withSuccessHandler(showFolders).cardsDisplay(folderId);
   };
-
 
   function showFolders(returnedArray_from_CardsDisplay) {
     let [folderName, folderId] = returnedArray_from_CardsDisplay;
@@ -36,13 +34,11 @@
   };
 
   // for breadscrumb
-
   var Idarray = [];
   var Namearray = [];
 
   function updateBreadCrumb(arg) {
     if (Idarray.includes(arg[0])) {
-
       var ind = Idarray.indexOf(arg[0]);
       Idarray = Idarray.slice(0, ind + 1);
       Namearray = Namearray.slice(0, ind + 1);
@@ -53,9 +49,7 @@
           "<li onclick=" + "getFilesAndFolders('" + Idarray[i] + "')  class='breadcrumb-item'>" + Namearray[i] +
           "</li>");
       }
-
     } else {
-
       Idarray.push(arg[0]);
       Namearray.push(arg[1]);
       $("#list").empty();
@@ -65,16 +59,11 @@
           "<li onclick=" + "getFilesAndFolders('" + Idarray[i] + "')  class='breadcrumb-item'>" + Namearray[i] +
           "</li>");
       }
-
     }
-
     $("#list li").last().addClass("disabled");
     $("#list li").last().addClass("active");
     document.getElementById("event-after-home").innerHTML = Namearray[0];
-
-
   }
-
 
   function goback() {
     var prev = Idarray[Idarray.length - 2];
@@ -87,15 +76,11 @@
       $("#list").append("<li onclick='changeView()' class='breadcrumb-item active'>Home</li>");
       $("#back_link").attr("href", "#Albums");
       document.getElementById("event-after-home").innerHTML = '';
-
-
     } else {
       getFilesAndFolders(prev.toString());
     }
 
   }
-
-
 
   function webFetch(content) {
     driveLinks = [];
@@ -109,8 +94,6 @@
     $(".flip-entry-info a").attr("data-lightbox", "Images");
     imgViewer();
   };
-
-
 
   function getFilesAndFolders(folderId) {
     if ($("#Home").hasClass("show")) {
@@ -133,9 +116,7 @@
     google.script.run.withSuccessHandler(updateBreadCrumb).getBreadcrumbData(folderId);
   };
 
-
   function change(returnedArray) {
-
     const [Folders, doesHaveFiles, foldersId, ParentID] = returnedArray;
     $(".FolderView").empty();
     var embed_url = "https://drive.google.com/embeddedfolderview?id=" + ParentID + "#grid";
@@ -152,9 +133,6 @@
         $(".loading-parent").remove();
       };
     };
-
-
-
     if (Folders.length > 0) {
 
       for (i = 0; i < Folders.length; i++) {
@@ -167,18 +145,15 @@
           "<div class='card-title'><h5>" + Folder + "</h5></div>" +
           "<div class = 'open-folder-btn'><button type='button' class='btn nav-color btn-md'" + "onclick =" +
           "getFilesAndFolders('" + foldersId[i] + "')" + ">Open Album</a></div></div></div></div>"
-
         );
       };
       $(".loading-parent").remove();
     };
   };
 
-
   function newMail() {
     google.script.run.sendMail();
   }
-
 
   var driveLinks = [];
 
@@ -196,7 +171,6 @@
       $(lg_img).attr("href", imgEnchance);
       $(".loading-parent").remove();
     }
-
     $(".lb-closeContainer").prepend(
       "<a class = 'download-btn' onclick='downloadimg()' href = ' ' download><i class='fas fa-arrow-circle-down'></i></a>"
     );
@@ -212,16 +186,12 @@
     $(".download-btn").attr("href", "https://drive.google.com/uc?export=download&id=" + link);
   }
 
-
-
-
   function hideMenu() {
     $(".navbar-collapse").removeClass("show");
     $(".navbar-toggler").attr("aria-expanded", "false");
     $(".navbar-toggler").addClass("collapsed");
     changeView();
   }
-
 
   function changeView() {
     $("#Home").removeClass("hide");
