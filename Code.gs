@@ -78,14 +78,14 @@ function yearBtn() {
   byName.sort(function (a, b) {
     let x = a.name.toLowerCase();
     let y = b.name.toLowerCase();
-    return x < y ? -1 : x > y ? 1 : 0;
+    return x > y ? -1 : x < y ? 1 : 0;
   });
   for (i = 0; i < byName.length; i++) {
     folderNames[i] = byName[i].name;
     folderIds[i] = byName[i].id;
   };
 
-  return [folderNames.reverse(), folderIds.reverse()];
+  return [folderNames, folderIds];
 }
 
 
