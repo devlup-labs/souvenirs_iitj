@@ -1,5 +1,5 @@
 function doGet(e) {
-  if (e.parameters.v == 'team') {
+  if (e.parameters.goto == 'team') {
     return HtmlService.createTemplateFromFile('team')
       .evaluate()
       .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL)
@@ -7,7 +7,7 @@ function doGet(e) {
 
   }
 
-  if (e.parameters.v == 'event') {
+  if (e.parameters.goto == 'event') {
     return HtmlService.createTemplateFromFile('event')
       .evaluate()
       .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL)
@@ -30,10 +30,10 @@ function include(filename) {
 
 // This function is used to return two array of child folders and child folder's Id , where agrument is Parent Folder's Id
 
-function Folder_Name_and_ID(parentFolder) {
+function folderNamesandIds(parentFolder) {
 
-  let foldersArray = [];
-  let foldersArrayId = [];
+  let folderNames = [];
+  let folderIds = [];
   while (parentFolder.hasNext()) {
     let Folder = parentFolder.next();
     foldersArray.push(Folder.getName());
@@ -45,70 +45,64 @@ function Folder_Name_and_ID(parentFolder) {
 
 
 // This code is used for getting folders and displaying Images -----------------------------------------------------
-function Checker(parent_folder_id) {
+function checker(parentFolderId) {
 
-  const parentfiles = DriveApp.getFolderById(parent_folder_id).getFiles();
-  const parentfolders = DriveApp.getFolderById(parent_folder_id).getFolders();
-  const filesArray = [];
+  const parentfiles = DriveApp.getFolderById(parentFolderId).getFiles();
+  const parentfolders = DriveApp.getFolderById(parentFolderId).getFolders();
+  const doesParentFolderHaveFiles = false;
 
-  while (parentfiles.hasNext()) {
-    filesArray.push(parentfiles.next().getName());
-    break;
+  if (parentfiles.hasNext()) {
+    doesParentFolderHaveFiles = true;
   }
 
-  let [foldersArray, foldersArrayID] = Folder_Name_and_ID(parentfolders);
+  let [folderNames, folderIds] = folderNamesandIds(parentfolders);
 
-  return [foldersArray, filesArray, foldersArrayID, parent_folder_id]
+  return [folderNames, doesParentFolderHaveFiles, folderIds, parentFolderId]
 }
 
 
+// function for getting options in Album Dropdown Menu
 
-// This code is used for generating Years button --------------------------------------------------------------------
-
-// ID of SDA WEBSITE FOLDER = '127DYBOd4M98t6KNCJeZ9Y6WJB7B5wb_3';
-function Yearbtn() {
-  const Organised = DriveApp.getFolderById('127DYBOd4M98t6KNCJeZ9Y6WJB7B5wb_3').getFolders();
-  let [YearFoldersName, YearFoldersId] = Folder_Name_and_ID(Organised);
-  let FolderList = [];
-  for (i = 0; i < YearFoldersName.length; i++) {
+function yearBtn() {
+  const sdaWebsiteFolder = DriveApp.getFolderById('127DYBOd4M98t6KNCJeZ9Y6WJB7B5wb_3').getFolders();
+  let [folderNames, folderIds] = folderNamesandIds(sdaWebsiteFolder);
+  let folderList = [];
+  for (i = 0; i < folderNames.length; i++) {
     let list = {
-      name: YearFoldersName[i],
-      id: YearFoldersId[i]
+      name: folderNames[i],
+      id: folderIds[i]
     };
-    FolderList.push(list);
+    folderList.push(list);
   };
-  //Logger.log(FolderList);
-  let byName = FolderList.slice(0);
+
+  let byName = folderList.slice(0);
   byName.sort(function (a, b) {
     let x = a.name.toLowerCase();
     let y = b.name.toLowerCase();
     return x < y ? -1 : x > y ? 1 : 0;
   });
-  // Logger.log(byName);
   for (i = 0; i < byName.length; i++) {
-    YearFoldersName[i] = byName[i].name;
-    YearFoldersId[i] = byName[i].id;
+    folderNames[i] = byName[i].name;
+    folderIds[i] = byName[i].id;
   };
-  // Logger.log(YearFoldersName);
-  //Logger.log(YearFoldersId);
 
-
-  return [YearFoldersName.reverse(), YearFoldersId.reverse()];
+  return [folderNames.reverse(), folderIds.reverse()];
 }
 
 
 
-//yearFolderId
-function CardsDisplay(yearFolderId) {
+// Get Event Folders for displaying at home page
+
+function cardsDisplay(yearFolderId) {
   const Folders = DriveApp.getFolderById(yearFolderId).getFolders();
-  let [FoldersName, FoldersId] = Folder_Name_and_ID(Folders);
-  return [FoldersName, FoldersId];
+  let [folderNames, folderIds] = folderNamesandIds(Folders);
+  return [folderNames, folderIds];
 
 }
 
 
-function Websitefetch(website_to_fetch) {
-  var response = UrlFetchApp.fetch(website_to_fetch);
+function websiteFetch(websiteToFetch) {
+  var response = UrlFetchApp.fetch(websiteToFetch);
   var content = response.getContentText();
   return content
 }
@@ -120,7 +114,7 @@ function getData(id) {
   return [id, name];
 }
 
-function sendmail() {
+function sendMail() {
   MailApp.sendEmail('sonawane.1@iitj.ac.in', 'Entry for SDA site', 'Data has been added to the spreadsheet. The link to the spreadsheet is attached below: https://docs.google.com/spreadsheets/d/1xJ8TyAVEcSm5RtgHW1KOOsb3-vbK3rmyC0eq2uCWZ4U/edit#gid=1155803024');
 }
 
@@ -146,9 +140,8 @@ function processForm(obj) {
   // Verify Catcha
   var isNotBot = verifyCaptcha(obj);
   if (!isNotBot) {
-    //    document.getElementById("user_photo_submit").attributes[0].value = "#";
     return 'You are a robot';
   }
-  sendmail();
+  sendMail();
   return 'Form submitted successfully';
 }
