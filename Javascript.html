@@ -65,7 +65,7 @@
     document.getElementById("event-after-home").innerHTML = Namearray[0];
   }
 
-  function goback() {
+  function eventGoBack() {
     var prev = Idarray[Idarray.length - 2];
     if (prev === undefined) {
       changeView();
@@ -169,7 +169,9 @@
       img[1] = "=s800";
       var imgEnchance = img[0] + img[1];
       $(lg_img).attr("href", imgEnchance);
+      if(i==0){
       $(".loading-parent").remove();
+      }
     }
     $(".lb-closeContainer").prepend(
       "<a class = 'download-btn' onclick='downloadimg()' href = ' ' download><i class='fas fa-arrow-circle-down'></i></a>"
