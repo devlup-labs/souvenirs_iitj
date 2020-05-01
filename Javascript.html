@@ -129,8 +129,8 @@
     $(".WebsiteFetch").append("<div class='loading-parent text-center'><div class='loading'></div></div>");
     $(".fetchedPage").remove();
     $(".bttn").remove();
-    google.script.run.withSuccessHandler(change).checker(folderId);
-    google.script.run.withSuccessHandler(updateBreadCrumb).getData(folderId);
+    google.script.run.withSuccessHandler(change).checkForChildFoldersAndFiles(folderId);
+    google.script.run.withSuccessHandler(updateBreadCrumb).getBreadcrumbData(folderId);
   };
 
 
