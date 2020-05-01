@@ -36,20 +36,19 @@ function folderNamesAndIds(parentFolder) {
   let folderIds = [];
   while (parentFolder.hasNext()) {
     let Folder = parentFolder.next();
-    foldersArray.push(Folder.getName());
-    foldersArrayId.push(Folder.getId());
-
+    folderNames.push(Folder.getName());
+    folderIds.push(Folder.getId());
   }
-  return [foldersArray, foldersArrayId]
+  return [folderNames, folderIds]
 }
 
 
 // This code is used for getting folders and displaying Images -----------------------------------------------------
-function checker(parentFolderId) {
+function checkForChildFoldersAndFiles(parentFolderId) {
 
   const parentfiles = DriveApp.getFolderById(parentFolderId).getFiles();
   const parentfolders = DriveApp.getFolderById(parentFolderId).getFolders();
-  const doesParentFolderHaveFiles = false;
+  let doesParentFolderHaveFiles = false;
 
   if (parentfiles.hasNext()) {
     doesParentFolderHaveFiles = true;
@@ -93,8 +92,8 @@ function yearBtn() {
 
 // Get Event Folders for displaying at home page
 
-function cardsDisplay(yearFolderId) {
-  const Folders = DriveApp.getFolderById(yearFolderId).getFolders();
+function cardsDisplay(FolderId) {
+  const Folders = DriveApp.getFolderById(FolderId).getFolders();
   let [folderNames, folderIds] = folderNamesAndIds(Folders);
   return [folderNames, folderIds];
 
@@ -107,7 +106,7 @@ function websiteFetch(websiteToFetch) {
   return content
 }
 
-function getData(id) {
+function getBreadcrumbData(id) {
   var x = DriveApp.getFolderById(id);
   var name = x.getName();
   var id = x.getId();
@@ -115,7 +114,7 @@ function getData(id) {
 }
 
 function sendMail() {
-  MailApp.sendEmail('sonawane.1@iitj.ac.in', 'Entry for SDA site', 'Data has been added to the spreadsheet. The link to the spreadsheet is attached below: https://docs.google.com/spreadsheets/d/1xJ8TyAVEcSm5RtgHW1KOOsb3-vbK3rmyC0eq2uCWZ4U/edit#gid=1155803024');
+  MailApp.sendEmail('secy_das@iitj.ac.in', 'Entry for SDA site', 'Data has been added to the spreadsheet. The link to the spreadsheet is attached below: https://docs.google.com/spreadsheets/d/1xJ8TyAVEcSm5RtgHW1KOOsb3-vbK3rmyC0eq2uCWZ4U/edit#gid=1155803024');
 }
 
 
