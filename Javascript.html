@@ -1,0 +1,220 @@
+<script>
+  google.script.run.withSuccessHandler(yearButton).yearBtn();
+
+  function yearButton(returnedArray_from_Yearbtn) {
+    const [folderName, folderId] = returnedArray_from_Yearbtn;
+    for (i = 0; i < folderName.length; i++) {
+      $(".dropdown-menu").append("<p class ='dropdown-item'" + "id = '" + folderId[i] + "' onclick = " +
+        "folderCounter('" + folderId[i] + "')" + ">" + folderName[i] + "</p>");
+    };
+    folderCounter(folderId[0]);
+  };
+
+  function folderCounter(folderId) {
+    $(".cards-holder").empty();
+    $(".cards-holder").append("<div class='loading-parent text-center'><div class='loading'></div></div>");
+    var name = document.getElementById(folderId).innerHTML;
+    document.getElementById("year_btn").innerHTML = name;
+    google.script.run.withSuccessHandler(showFolders).cardsDisplay(folderId);
+  };
+
+  function showFolders(returnedArray_from_CardsDisplay) {
+    let [folderName, folderId] = returnedArray_from_CardsDisplay;
+    for (i = 0; i < folderName.length; i++) {
+      $(".cards-holder").append(
+        "<div class='card-warper'>" +
+        "<div class='card'>" +
+        "<div class='card-body'>" +
+        "<div class='card-title'><h5>" + folderName[i] + "</h5></div>" +
+        "<div class = 'open-folder-btn'><a href='#header'type='button' class='btn nav-color btn-md'" + "onclick =" +
+        "getFilesAndFolders('" + folderId[i] + "')" + ">Open Album</a></div></div></div></div>"
+      );
+    };
+    $(".loading-parent").remove();
+  };
+
+  // for breadscrumb
+  var Idarray = [];
+  var Namearray = [];
+
+  function updateBreadCrumb(arg) {
+    if (Idarray.includes(arg[0])) {
+      var ind = Idarray.indexOf(arg[0]);
+      Idarray = Idarray.slice(0, ind + 1);
+      Namearray = Namearray.slice(0, ind + 1);
+      $("#list").empty();
+      $("#list").append("<li onclick='changeView()' class='breadcrumb-item'>Home</li>");
+      for (i = 0; i < Idarray.length; i++) {
+        $("#list").append(
+          "<li onclick=" + "getFilesAndFolders('" + Idarray[i] + "')  class='breadcrumb-item'>" + Namearray[i] +
+          "</li>");
+      }
+    } else {
+      Idarray.push(arg[0]);
+      Namearray.push(arg[1]);
+      $("#list").empty();
+      $("#list").append("<li onclick='changeView()' class='breadcrumb-item'>Home</li>");
+      for (i = 0; i < Idarray.length; i++) {
+        $("#list").append(
+          "<li onclick=" + "getFilesAndFolders('" + Idarray[i] + "')  class='breadcrumb-item'>" + Namearray[i] +
+          "</li>");
+      }
+    }
+    $("#list li").last().addClass("disabled");
+    $("#list li").last().addClass("active");
+    document.getElementById("event-after-home").innerHTML = Namearray[0];
+  }
+
+  function eventGoBack() {
+    var prev = Idarray[Idarray.length - 2];
+    if (prev === undefined) {
+      changeView();
+      $(".loading-parent").remove();
+      Idarray.length = 0;
+      Namearray.length = 0;
+      $("#list").empty();
+      $("#list").append("<li onclick='changeView()' class='breadcrumb-item active'>Home</li>");
+      $("#back_link").attr("href", "#Albums");
+      document.getElementById("event-after-home").innerHTML = '';
+    } else {
+      getFilesAndFolders(prev.toString());
+    }
+
+  }
+
+  function webFetch(content) {
+    driveLinks = [];
+    $(".download-btn").remove();
+    $(".fetchedPage").remove();
+    $(".WebsiteFetch").append("<div class = 'fetchedPage'>" + content + "</div>");
+    $(".flip-contents").removeClass("flip-list-view");
+    $(".flip-contents").addClass("flip-grid-view");
+    $(".flip-entry-list-icon").remove();
+    $(".flip-entry-title").remove();
+    $(".flip-entry-info a").attr("data-lightbox", "Images");
+    imgViewer();
+  };
+
+  function getFilesAndFolders(folderId) {
+    if ($("#Home").hasClass("show")) {
+      $("#Home").removeClass("show");
+      $("#Home").addClass("hide");
+      $("#header").removeClass("header");
+      $(".welcome").css("display", "none");
+      $("#nav-logo").css("width", "50px !important");
+      $(".navbar-collapse").addClass("nav-color");
+      $(".navbar").addClass("bg-colored");
+      $("#form").css("display", "none");
+      $("#Event").css("display", "block");
+      $("#Albums").css("display", "none");
+    };
+    $(".empty-folder").remove();
+    $(".WebsiteFetch").append("<div class='loading-parent text-center'><div class='loading'></div></div>");
+    $(".fetchedPage").remove();
+    $(".bttn").remove();
+    google.script.run.withSuccessHandler(change).checkForChildFoldersAndFiles(folderId);
+    google.script.run.withSuccessHandler(updateBreadCrumb).getBreadcrumbData(folderId);
+  };
+
+  function change(returnedArray) {
+    const [Folders, doesHaveFiles, foldersId, ParentID] = returnedArray;
+    $(".FolderView").empty();
+    var embed_url = "https://drive.google.com/embeddedfolderview?id=" + ParentID + "#grid";
+    if (doesHaveFiles == true) {
+      google.script.run.withSuccessHandler(webFetch).websiteFetch(embed_url);
+    };
+
+    if (doesHaveFiles == false) {
+      $(".fetchedPage").remove();
+      if (Folders.length == 0) {
+        $(".FolderView").append(
+          "<div class = 'empty-folder'><h1>Empty Folder</h1></div>"
+        )
+        $(".loading-parent").remove();
+      };
+    };
+    if (Folders.length > 0) {
+
+      for (i = 0; i < Folders.length; i++) {
+        Folder = Folders[i];
+        $(".FolderView").append(
+
+          "<div class='card-warper bttn show'>" +
+          "<div class='card'>" +
+          "<div class='card-body'>" +
+          "<div class='card-title'><h5>" + Folder + "</h5></div>" +
+          "<div class = 'open-folder-btn'><button type='button' class='btn nav-color btn-md'" + "onclick =" +
+          "getFilesAndFolders('" + foldersId[i] + "')" + ">Open Album</a></div></div></div></div>"
+        );
+      };
+      $(".loading-parent").remove();
+    };
+  };
+
+  function newMail() {
+    google.script.run.sendMail();
+  }
+
+  var driveLinks = [];
+
+  function imgViewer() {
+    var imglist = $(".flip-entry img");
+    var lg_imglist = $(".flip-entry-info a");
+    for (i = 0; i < imglist.length; i++) {
+      var img = imglist[i];
+      var lg_img = lg_imglist[i];
+      driveLinks.push($(lg_img).attr("href"));
+      var img_src = $(img).attr("src");
+      var img = img_src.split("=");
+      img[1] = "=s800";
+      var imgEnchance = img[0] + img[1];
+      $(lg_img).attr("href", imgEnchance);
+      if(i==0){
+      $(".loading-parent").remove();
+      }
+    }
+    $(".lb-closeContainer").prepend(
+      "<a class = 'download-btn' onclick='downloadimg()' href = ' ' download><i class='fas fa-arrow-circle-down'></i></a>"
+    );
+  };
+
+  function downloadImg() {
+    var text = $(".lb-number").text();
+    var count = text.split(" ")[1];
+    var number = parseInt(count);
+    var link = driveLinks[number - 1]
+    link = link.replace("https://drive.google.com/file/d/", "");
+    link = link.replace("/view?usp=drive_web", "");
+    $(".download-btn").attr("href", "https://drive.google.com/uc?export=download&id=" + link);
+  }
+
+  function hideMenu() {
+    $(".navbar-collapse").removeClass("show");
+    $(".navbar-toggler").attr("aria-expanded", "false");
+    $(".navbar-toggler").addClass("collapsed");
+    changeView();
+  }
+
+  function changeView() {
+    $("#Home").removeClass("hide");
+    $("#Home").addClass("show");
+    $("#header").addClass("header");
+    $(".welcome").css("display", "flex");
+    $(".navbar-nav").removeClass("nav-color");
+    $(".navbar").removeClass("bg-colored");
+    $(".navbar-collapse").removeClass("nav-color");
+    $("#nav-logo").css("width", "60px !important");
+    $("#Event").css("display", "none");
+    $("#form").css("display", "block");
+    $("#Albums").css("display", "block");
+    $(".fetchedPage").remove();
+    $(".FolderView").empty();
+    Idarray.length = 0;
+    Namearray.length = 0;
+    $("#list").empty();
+    $("#list").append("<li onclick='changeView()' class='breadcrumb-item active'>Home</li>");
+    document.getElementById("event-after-home").innerHTML = '';
+    $(".nav-item").removeClass("active");
+    $(".loading-parent").remove();
+  }
+</script>
