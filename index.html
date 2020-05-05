@@ -193,7 +193,7 @@
                     </div>
                     <div class="col-lg-12">
                         <a id="back_link" href="#"><button id="backbtn" class="btn btn-primary btn-sm"
-                                onclick="goback()"><i class="fas fa-angle-left pl-1"></i> Back</button></a>
+                                onclick="eventGoBack()"><i class="fas fa-angle-left pl-1"></i> Back</button></a>
                     </div>
                 </div>
             </div>
@@ -201,7 +201,7 @@
             <!-- Breadcrumb here -->
             <div id="breadcrumb-display" aria-label="breadcrumb">
                 <ol id="list" class="breadcrumb">
-                    <li onclick="gohome()" id="home-btn" class="breadcrumb-item active">
+                    <li onclick="changeView()" id="home-btn" class="breadcrumb-item active">
                         Home
                     </li>
                 </ol>
@@ -228,7 +228,7 @@
                 <div class="agile-volt">
 
                     <div class="agile-voltsub">
-                        <h2>Application form</h2>
+                        <h2>Share Photos</h2>
                         <script type="text/javascript">
                             var submitted = false;
                         </script>
@@ -379,7 +379,7 @@
 
             <!-- Copyright -->
             <div class="footer-copyright text-center py-3">© 2020, made with <i class="fa fa-heart"></i> by <a
-                    class="links" target="_self" href="<?= ScriptApp.getService().getUrl(); ?>?v=team"><b> SDA WebD
+                    class="links" target="_self" href="<?= ScriptApp.getService().getUrl(); ?>?goto=team"><b> SDA WebD
                         Team</b> </a>for Student Design and Art Society
 
             </div>
