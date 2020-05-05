@@ -1,6 +1,8 @@
 # souvenirs_iitj
 #### A website for Student Design and Arts Society, IIT Jodhpur aimed at providing the photos of events in institute to its residents
 
+[Souviners - IIT J](https://devlup-labs.github.io/souvenirs_iitj/)
+
 ## Tech Stack
 Google Apps Script is used for the entire project. Google Apps Script allows us to use various services by Google like Google Drive, Google Spreadsheets, G-Mail etc. directly. All these advantages by Google Apps Script have been exploited.
 It even allows you to deploy the website in its own domain.
