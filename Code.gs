@@ -97,7 +97,7 @@ function sendMail() {
 }
 
 // recaptcha
-var secret = '6Ld_YuwUAAAAAOH62DtrydnqtgEO540NvV1U2_Rn';
+var secret = INSERT_YOUR_SECRET_HERE;
 
 function verifyCaptcha(formObj) {
   var payload = {
