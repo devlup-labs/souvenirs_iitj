@@ -93,7 +93,7 @@ function getBreadcrumbData(id) {
 }
 
 function sendMail() {
-  MailApp.sendEmail('secy_das@iitj.ac.in', 'Entry for SDA site', 'Data has been added to the spreadsheet. The link to the spreadsheet is attached below: https://docs.google.com/spreadsheets/d/1xJ8TyAVEcSm5RtgHW1KOOsb3-vbK3rmyC0eq2uCWZ4U/edit#gid=1155803024');
+  MailApp.sendEmail('secy_das@iitj.ac.in', 'Entry for SDA site', 'Data has been added to the spreadsheet. The link to the spreadsheet is attached below: https://docs.google.com/spreadsheets/d/1Z9i71Z91WzIHr1ErXEGiVddFJ7J_H8nwINl9QvymiBM/edit#gid=1507586924');
 }
 
 // recaptcha
